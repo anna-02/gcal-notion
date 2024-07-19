@@ -29,16 +29,12 @@ jobs:
 
       - name: Build the project
         run: |
-          mkdir _site
-          cp index.html _site/
-          cp styles.css _site/
-          cp script.js _site/
-          cp config.js _site/
+          mkdir dist
+          cp index.html dist/
+          cp styles.css dist/
+          cp script.js dist/
+          cp config.js dist/
 
-      - name: Upload artifact
-        # Automatically uploads an artifact from the './_site' directory by default
-        uses: actions/upload-pages-artifact@v3
-          
   # deployment
   deploy:
     runs-on: ubuntu-latest
@@ -52,5 +48,5 @@ jobs:
         uses: peaceiris/actions-gh-pages@v4
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./_site
+          publish_dir: ./dist
 
