@@ -14,6 +14,12 @@ jobs:
         uses: actions/checkout@v2
         with:
           node-version: '16'
+        run: |
+          npm install
+          npm run-script build
+        env:
+          API_KEY: ${{ secrets.API_KEY }}
+          CLIENT_ID: ${{ secrets.CLIENT_ID }}
 
       - name: Deploy to GitHub Pages
         run: |
@@ -22,9 +28,7 @@ jobs:
           cp styles.css dist/
           cp script.js dist/
           cp config.js dist/
-        env:
-          API_KEY: ${{ secrets.API_KEY }}
-          CLIENT_ID: ${{ secrets.CLIENT_ID }}
+
 
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v3
